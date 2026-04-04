@@ -8,9 +8,9 @@ Autores del proyecto:
 
 Sofía Belén Bernini
 
+Catalina Hawes
+
 Angelina Marengo
 
 Victoria Mochnacs
-
-Catalina Hawes
 
