@@ -6,6 +6,7 @@ Created on Fri Mar 27 11:33:57 2026
 @author: catalinahawes
 """
 
+<<<<<<< Updated upstream
 from src.utils_ecg import detectar_picos_qrs
 
 
@@ -126,11 +127,123 @@ def calcular_fc_desde_datos(datos: list) -> float:
     Parameters
     ----------
     datos : list
-        DESCRIPTION.
+=======
+#Esto no sabemos si va o no
+def calcular_promedio_senal(datos: list) -> float:
+    """
+    Calcula el promedio de la senal ECG
+
+    Parameters
+    ----------
+    datos : list
+        Ingresa una lista con senales ECG
 
     Returns
     -------
     float
+        El valor del promedio de la lista ingresada.
+
+    """
+    
+    suma= 0
+    cantidad= 0
+    
+    for i in datos:
+        suma+= i
+        cantidad+=1
+    
+    if cantidad == 0:
+        return 0
+    
+    promedio= suma/cantidad
+    
+    return promedio
+    
+
+def calcular_maximo_minimo(datos: list) -> float:
+    """
+    Dice cual es la senal mas alta y la mas baja de la lista ingresada.
+
+    Parameters
+    ----------
+    datos : list
+        Ingresa una lista con senales ECG.
+
+    Returns
+    -------
+    maximo : float
+        Cual es la senal mas alta
+    minimo : float
+        Cual es la senal mas baja.
+
+    """
+    maximo= None
+    minimo= None
+    
+    for i in datos:
+        if i > maximo:
+            maximo= i
+    
+    for x in datos:
+        if x < minimo:
+            minimo= x
+            
+    return maximo, minimo
+            
+    
+
+def calcular_frecuencia_cardiaca(picos: list) -> float: 
+    """
+    Calcula la frecuencia por minuto de los picos de latidos
+
+    Parameters
+    ----------
+    picos : list
+        Con los tiempos en los que se dieron los latidos.
+
+    Returns
+    -------
+    float
+        Cual fue la frecuencia cardiaca por minuto.
+
+    """
+    if len(picos) < 2:
+        return 0
+
+    tiempo_total = picos[-1] - picos[0]
+    
+    cantidad_latidos = len(picos)
+
+    if tiempo_total == 0:
+        return 0
+
+    frecuencia = cantidad_latidos / tiempo_total
+
+    frecuencia_bpm = frecuencia * 60
+
+    return frecuencia_bpm
+    
+#No entendi muy bien esta funcion que sigue, entonces no sabria como es el docstring
+
+from src.utils_ecg import detectar_picos_qrs
+
+def calcular_fc_desde_datos(datos):
+    """
+    
+
+    Parameters
+    ----------
+    datos : TYPE
+>>>>>>> Stashed changes
+        DESCRIPTION.
+
+    Returns
+    -------
+<<<<<<< Updated upstream
+    float
+=======
+    TYPE
+>>>>>>> Stashed changes
         DESCRIPTION.
 
     """
@@ -143,4 +256,8 @@ def calcular_fc_desde_datos(datos: list) -> float:
 
     picos = detectar_picos_qrs(tiempos, senal)
 
+<<<<<<< Updated upstream
     return calcular_frecuencia_cardiaca(picos)
+=======
+    return calcular_frecuencia_cardiaca(picos)
+>>>>>>> Stashed changes
