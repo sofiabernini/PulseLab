@@ -8,7 +8,10 @@ from src.carga_datos import cargar_datos
 from src.procesamiento_datos import filtrar_datos
 from src.metricas import calcular_promedio_senal, calcular_fc_desde_datos
 
-ruta = "datos/datos_proyecto.csv"
+try:
+    ruta = "datos/datos_proyecto.csv"
+except as e:
+    print (f"Error de tipo {e}")
     
 todos_los_datos = cargar_datos(ruta)
 
