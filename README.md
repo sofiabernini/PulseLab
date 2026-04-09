@@ -40,3 +40,6 @@ El programa produce los siguiente resultados:
 - Detecta eventos en la señal
 - Calcula frecuencia cardíaca
 
+
+Errores y Validaciones:
+- En el programa principal, se considera que haya errores dentro del archivo con los datos del proyecto.
