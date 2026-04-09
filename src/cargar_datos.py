@@ -52,12 +52,20 @@ def parsear_linea (linea):
     dicc_participante = {}
    
     dicc_participante ["ID participante"] = int(id_participante)
-    dicc_participante ["Tiempo"] = float (tiempo)
-    dicc_participante["Valor"] = float (valor)
-    dicc_participante ["Fase"] = fase
-    dicc_participante ["Condición"] = condicion_experimental
-    dicc_participante ["Hit"] = hit
     
+    if dicc_participante ["ID participante"] not in dicc_participante:
+        dicc_participante ["Tiempo"] = float ([tiempo])
+        dicc_participante["Valor"] = float ([valor])
+        dicc_participante ["Fase"] = [fase]
+        dicc_participante ["Condición"] = condicion_experimental
+        dicc_participante ["Hit"] = [hit]
+    
+    else:
+        dicc_participante["Tiempo"].append(tiempo)
+        dicc_participante["Valor"].append(valor)
+        dicc_participante["Fase"].append (fase)
+        dicc_participante["Hit"].append(hit)
+
     return dicc_participante
 
 
