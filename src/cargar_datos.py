@@ -20,17 +20,36 @@ def cargar_datos (ruta_archivo):
     lista_participantes : lista (de diccionarios)
 
     '''
-    archivo = open (ruta_archivo,"r")
-    lineas = archivo.readlines()
-    archivo.close()
     
-    lista_participantes = []
+    #validación de ruta de archivo con un bloque try/except
+    while True:
+        try:
+            archivo = open (ruta_archivo,"r")
+            lineas = archivo.readlines()
+            archivo.close()
         
+        except FileNotFoundError:
+            print ("El archivo que se quiere abrir no fue encontrado en la ruta indicada")
+            
+        else:
+            break
+        
+    lista_participantes = []
+   
+    # acá manejé la posibilidad de que la linea parseada sea None, e indiqué que no se guarde en la lista sea == a None 
     for linea in lineas:
         participante = parsear_linea (linea)
-        lista_participantes.append(participante)
+        if participante == None:
+            continue
+        else:
+            lista_participantes.append(participante)
         
-    return lista_participantes
+    #código que maneja el caso en el que se cree una lista vacía porque el archivo esté vacío (aunque en esta instancia no representa un error como tal)    
+    
+    if not lista_participantes:
+        return None
+    else:
+        return lista_participantes
 
 def parsear_linea (linea):
     '''
@@ -45,29 +64,31 @@ def parsear_linea (linea):
     dicc_participante : dicc. es un diccionario con la información de cada participante
 
     '''
+    if linea: 
+        linea = linea.strip("\n")
+        id_participante, tiempo, valor, fase, condicion_experimental, hit = linea.split(",")
+        
+        dicc_participante = {}
+       
+        dicc_participante ["ID participante"] = int(id_participante)
+        
+        if dicc_participante ["ID participante"] not in dicc_participante:
+            dicc_participante ["Tiempo"] = [float(tiempo)]
+            dicc_participante["Valor"] = [float(valor)]
+            dicc_participante ["Fase"] = [fase]
+            dicc_participante ["Condición"] = condicion_experimental
+            dicc_participante ["Hit"] = [hit]
+        
+        else:
+            dicc_participante["Tiempo"].append(float(tiempo))
+            dicc_participante["Valor"].append(float(valor))
+            dicc_participante["Fase"].append (fase)
+            dicc_participante["Hit"].append(hit)
     
-    linea = linea.strip("\n")
-    id_participante, tiempo, valor, fase, condicion_experimental, hit = linea.split(",")
-    
-    dicc_participante = {}
-   
-    dicc_participante ["ID participante"] = int(id_participante)
-    
-    if dicc_participante ["ID participante"] not in dicc_participante:
-        dicc_participante ["Tiempo"] = [float(tiempo)]
-        dicc_participante["Valor"] = [float(valor)]
-        dicc_participante ["Fase"] = [fase]
-        dicc_participante ["Condición"] = condicion_experimental
-        dicc_participante ["Hit"] = [hit]
-    
+        return dicc_participante
+
     else:
-        dicc_participante["Tiempo"].append(float(tiempo))
-        dicc_participante["Valor"].append(float(valor))
-        dicc_participante["Fase"].append (fase)
-        dicc_participante["Hit"].append(hit)
-
-    return dicc_participante
-
+        return None
 
 
 
