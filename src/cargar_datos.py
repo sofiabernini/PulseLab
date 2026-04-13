@@ -17,22 +17,22 @@ def cargar_datos (ruta_archivo):
 
     Returns
     -------
-    lista_participantes : lista (de diccionarios)
-
+    lista_participantes : lista (de diccionarios) si tiene valores
+    None: si el archivo no tiene lineas para parsear
     '''
     
-    #validación de ruta de archivo con un bloque try/except
+    #validación de ruta de archivo con un bloque try/except --> esto podría obviarse, preguntar a Euge hoy o a Marcos x mail. 
     while True:
         try:
             archivo = open (ruta_archivo,"r")
-            lineas = archivo.readlines()
-            archivo.close()
         
         except FileNotFoundError:
             print ("El archivo que se quiere abrir no fue encontrado en la ruta indicada")
             ruta_archivo = input ("Ingrese una ruta de archivo existente")
             
         else:
+            lineas = archivo.readlines()
+            archivo.close()
             break
         
     lista_participantes = []
@@ -48,7 +48,7 @@ def cargar_datos (ruta_archivo):
     #código que maneja el caso en el que se cree una lista vacía porque el archivo esté vacío (aunque en esta instancia no representa un error como tal)    
     
     if not lista_participantes:
-        return "El archivo está vacío"
+        return None
     else:
         return lista_participantes
 
@@ -62,7 +62,8 @@ def parsear_linea (linea):
 
     Returns
     -------
-    dicc_participante : dicc. es un diccionario con la información de cada participante
+    dicc_participante : dicc. es un diccionario con la información de cada participante, y lo devuelve si la linea parseada tiene contenido
+    None: si la linea parseada no tiene contenido
 
     '''
     if linea: 
@@ -91,8 +92,6 @@ def parsear_linea (linea):
     else:
         return None
 
-ruta = "datos/PulseLab_mock_data.CSV"
-cargar_datos (ruta)
 
 
 
