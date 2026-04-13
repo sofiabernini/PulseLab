@@ -13,7 +13,7 @@ ruta = "datos/PulseLab_mock_data.csv"
 todos_los_datos = cargar_datos(ruta)
 
 for participante in todos_los_datos:
-    id = participante["id_participante"]
+    id = participante["ID participante"]
     datos_participante = filtrar_datos(todos_los_datos, id)
    
     if datos_participante:
