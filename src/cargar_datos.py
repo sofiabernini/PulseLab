@@ -30,6 +30,7 @@ def cargar_datos (ruta_archivo):
         
         except FileNotFoundError:
             print ("El archivo que se quiere abrir no fue encontrado en la ruta indicada")
+            ruta_archivo = input ("Ingrese una ruta de archivo existente")
             
         else:
             break
@@ -47,7 +48,7 @@ def cargar_datos (ruta_archivo):
     #código que maneja el caso en el que se cree una lista vacía porque el archivo esté vacío (aunque en esta instancia no representa un error como tal)    
     
     if not lista_participantes:
-        return None
+        return "El archivo está vacío"
     else:
         return lista_participantes
 
@@ -89,6 +90,10 @@ def parsear_linea (linea):
 
     else:
         return None
+
+ruta = "datos/PulseLab_mock_data.CSV"
+cargar_datos (ruta)
+
 
 
 
