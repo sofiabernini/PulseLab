@@ -9,11 +9,9 @@ from src.procesamiento_datos import filtrar_datos
 from src.metricas import calcular_promedio_senal, calcular_fc_desde_datos
 
 try:
-    ruta = "datos/datos_proyecto.csv"
+    ruta = "datos/PulseLab_mock_data.csv"
 except Exception as e:
     print (f"Error de tipo {e}")
-
-ruta = "datos/PulseLab_mock_data.csv"
     
 todos_los_datos = cargar_datos(ruta)
 
