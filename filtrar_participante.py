@@ -12,8 +12,8 @@ def filtrar_por_participante(datos, id_participante):
 
     Parameters
     ----------
-    datos : dict
-        Diccionario con los datos de los participantes.
+    datos : lista
+        lista con los datos de los participantes en diccionarios distintos.
     id_participante : int
         Es el id del participante buscado.
 
@@ -21,6 +21,8 @@ def filtrar_por_participante(datos, id_participante):
     -------
     registro : dict
         Es el diccionario con los datos del id del participante buscado.
+    None
+        Si el id buscado no está en la lista datos.
 
     """
     for registro in datos: 
