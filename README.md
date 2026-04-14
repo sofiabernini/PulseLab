@@ -43,3 +43,4 @@ El programa produce los siguiente resultados:
 
 Errores y Validaciones:
 - En el programa principal, se considera que haya errores dentro del archivo con los datos del proyecto.
+- En el diagrama de flujo de la función filtrar_por_participante había sacado dos flechas de un mismo rectángulo, lo que hace que el programa no sepa qué camino debe seguir. Por esta razón modifiqué el diagrama para que recorra la lista. Si encuentra el id que devuelva el diccionario, si no lo encuentra que siga recorriendo y si termina de recorrer y no lo encuentra que devuelva None. 
