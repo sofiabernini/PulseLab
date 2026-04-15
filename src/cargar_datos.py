@@ -18,10 +18,9 @@ def cargar_datos (ruta_archivo):
     Returns
     -------
     lista_participantes : lista (de diccionarios) si tiene valores
-    None: si el archivo no tiene lineas para parsear
+    None: si el archivo no se puede abrir o si el archivo no tiene lineas para parsear
     '''
-    
-    #validación de ruta de archivo con un bloque try/except --> esto podría obviarse, preguntar a Euge hoy o a Marcos x mail. 
+    #bloque try/except para evitar atrapar errores de apertura del archivo
     try:
         archivo = open (ruta_archivo,"r")
         lineas = archivo.readlines()
