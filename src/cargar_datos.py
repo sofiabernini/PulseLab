@@ -22,32 +22,28 @@ def cargar_datos (ruta_archivo):
     '''
     
     #validación de ruta de archivo con un bloque try/except --> esto podría obviarse, preguntar a Euge hoy o a Marcos x mail. 
-    while True:
-        try:
-            archivo = open (ruta_archivo,"r")
+    try:
+        archivo = open (ruta_archivo,"r")
+        lineas = archivo.readlines()
+        archivo.close()
         
-        except FileNotFoundError:
-            print ("El archivo que se quiere abrir no fue encontrado en la ruta indicada")
-            ruta_archivo = input ("Ingrese una ruta de archivo existente")
-            
-        else:
-            lineas = archivo.readlines()
-            archivo.close()
-            break
-        
+    except FileNotFoundError:
+        print ("El archivo que se quiere abrir no fue encontrado en la ruta indicada")
+                    
     lista_participantes = []
    
-    # acá manejé la posibilidad de que la linea parseada sea None, e indiqué que no se guarde en la lista sea == a None 
+    # acá manejé la posibilidad de que la linea parseada sea None, e indiqué que no se guarde en la lista si linea == None 
     for linea in lineas:
-        participante = parsear_linea (linea)
-        if participante == None:
+        dato = parsear_linea (linea)
+        if dato == None:
             continue
-        else:
-            lista_participantes.append(participante)
+      #me falta agregar qué hace si la linea no está vacía. quiero poder acumular los valores de tiempo, valor, fase y hit (si ya está el diccionario en la lista) y sino agregar el diccionario si no está.  
         
+            
+    
     #código que maneja el caso en el que se cree una lista vacía porque el archivo esté vacío (aunque en esta instancia no representa un error como tal)    
     
-    if not lista_participantes:
+    if len(lista_participantes) == 0:
         return None
     else:
         return lista_participantes
@@ -66,15 +62,34 @@ def parsear_linea (linea):
     None: si la linea parseada no tiene contenido
 
     '''
-    if linea: 
-        linea = linea.strip("\n")
-        id_participante, tiempo, valor, fase, condicion_experimental, hit = linea.split(",")
+    
+    if len(linea.strip()) == 0: 
+        return None
+    
+    linea = linea.strip("\n")
+    id_participante, tiempo, valor, fase, condicion_experimental, hit = linea.split(",")
         
-        dicc_participante = {}
-       
+    dicc_participante = {
+        "ID participante": int(id_participante),
+        "Tiempo": float(tiempo),
+        "Valor": float(valor),
+        "Fase": fase,
+        "Condición": condicion_experimental,
+        "Hit": hit}
+    
+    return dicc_participante
+      
+
+
+
+
+
+
+
+#ignoren esto, quizás lo uso en otra parte del código
         dicc_participante ["ID participante"] = int(id_participante)
         
-        if dicc_participante ["ID participante"] not in dicc_participante:
+        if dicc_participante["ID participante"] not in dicc_participante:
             dicc_participante ["Tiempo"] = [float(tiempo)]
             dicc_participante["Valor"] = [float(valor)]
             dicc_participante ["Fase"] = [fase]
