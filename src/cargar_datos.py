@@ -29,6 +29,7 @@ def cargar_datos (ruta_archivo):
         
     except FileNotFoundError:
         print ("El archivo que se quiere abrir no fue encontrado en la ruta indicada")
+        return None #este no sé si es necesario ¿no era que si entraba el except ya se cortaba la función?
                     
     lista_participantes = []
    
@@ -37,10 +38,21 @@ def cargar_datos (ruta_archivo):
         dato = parsear_linea (linea)
         if dato == None:
             continue
-      #me falta agregar qué hace si la linea no está vacía. quiero poder acumular los valores de tiempo, valor, fase y hit (si ya está el diccionario en la lista) y sino agregar el diccionario si no está.  
         
-            
-    
+        encontrado = False
+        
+        for participante in lista_participantes:
+            if participante["ID participante"] == dato["ID participante"]:
+                participante["Tiempo"].append(dato["Tiempo"][0])
+                participante["Valor"].append(dato["Valor"][0])
+                participante["Fase"].append(dato["Fase"][0])
+                participante["Hit"].append(dato["Hit"][0])
+                
+                encontrado = True  
+                
+        if encontrado:
+            lista_participantes.append(dato)
+                             
     #código que maneja el caso en el que se cree una lista vacía porque el archivo esté vacío (aunque en esta instancia no representa un error como tal)    
     
     if len(lista_participantes) == 0:
@@ -71,41 +83,13 @@ def parsear_linea (linea):
         
     dicc_participante = {
         "ID participante": int(id_participante),
-        "Tiempo": float(tiempo),
-        "Valor": float(valor),
-        "Fase": fase,
+        "Tiempo": [float(tiempo)],
+        "Valor": [float(valor)],
+        "Fase": [fase],
         "Condición": condicion_experimental,
-        "Hit": hit}
+        "Hit": [bool(hit)]}
     
     return dicc_participante
-      
-
-
-
-
-
-
-
-#ignoren esto, quizás lo uso en otra parte del código
-        dicc_participante ["ID participante"] = int(id_participante)
-        
-        if dicc_participante["ID participante"] not in dicc_participante:
-            dicc_participante ["Tiempo"] = [float(tiempo)]
-            dicc_participante["Valor"] = [float(valor)]
-            dicc_participante ["Fase"] = [fase]
-            dicc_participante ["Condición"] = condicion_experimental
-            dicc_participante ["Hit"] = [hit]
-        
-        else:
-            dicc_participante["Tiempo"].append(float(tiempo))
-            dicc_participante["Valor"].append(float(valor))
-            dicc_participante["Fase"].append (fase)
-            dicc_participante["Hit"].append(hit)
-    
-        return dicc_participante
-
-    else:
-        return None
 
 
 
