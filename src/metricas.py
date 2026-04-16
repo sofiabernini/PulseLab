@@ -6,7 +6,7 @@ Created on Fri Mar 27 11:33:57 2026
 @author: catalinahawes
 """
 
-from función_detectar_picos import detectar_picos_qrs
+from src.función_detectar_picos import detectar_picos_qrs
 
 
 def calcular_promedio_senal(datos: list) -> float:
