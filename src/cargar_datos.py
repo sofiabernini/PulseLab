@@ -18,36 +18,43 @@ def cargar_datos (ruta_archivo):
     Returns
     -------
     lista_participantes : lista (de diccionarios) si tiene valores
-    None: si el archivo no tiene lineas para parsear
+    None: si el archivo no se puede abrir o si el archivo no tiene lineas para parsear
     '''
-    
-    #validación de ruta de archivo con un bloque try/except --> esto podría obviarse, preguntar a Euge hoy o a Marcos x mail. 
-    while True:
-        try:
-            archivo = open (ruta_archivo,"r")
+    #bloque try/except para evitar atrapar errores de apertura del archivo
+    try:
+        archivo = open (ruta_archivo,"r")
+        lineas = archivo.readlines()
+        archivo.close()
         
-        except FileNotFoundError:
-            print ("El archivo que se quiere abrir no fue encontrado en la ruta indicada")
-            ruta_archivo = input ("Ingrese una ruta de archivo existente")
-            
-        else:
-            lineas = archivo.readlines()
-            archivo.close()
-            break
-        
+    except FileNotFoundError:
+        print ("El archivo que se quiere abrir no fue encontrado en la ruta indicada")
+        return None #este no sé si es necesario ¿no era que si entraba el except ya se cortaba la función?
+                    
     lista_participantes = []
    
-    # acá manejé la posibilidad de que la linea parseada sea None, e indiqué que no se guarde en la lista sea == a None 
+    # acá manejé la posibilidad de que la linea parseada sea None, e indiqué que no se guarde en la lista si linea == None 
     for linea in lineas:
-        participante = parsear_linea (linea)
-        if participante == None:
+        dato = parsear_linea (linea)
+        if dato == None:
             continue
-        else:
-            lista_participantes.append(participante)
         
+        encontrado = False
+        
+        for participante in lista_participantes:
+            if participante["ID participante"] == dato["ID participante"]:
+                participante["Tiempo"].append(dato["Tiempo"][0])
+                participante["Valor"].append(dato["Valor"][0])
+                participante["Fase"].append(dato["Fase"][0])
+                participante["Hit"].append(dato["Hit"][0])
+                
+                encontrado = True  
+                
+        if encontrado:
+            lista_participantes.append(dato)
+                             
     #código que maneja el caso en el que se cree una lista vacía porque el archivo esté vacío (aunque en esta instancia no representa un error como tal)    
     
-    if not lista_participantes:
+    if len(lista_participantes) == 0:
         return None
     else:
         return lista_participantes
@@ -66,31 +73,22 @@ def parsear_linea (linea):
     None: si la linea parseada no tiene contenido
 
     '''
-    if linea: 
-        linea = linea.strip("\n")
-        id_participante, tiempo, valor, fase, condicion_experimental, hit = linea.split(",")
-        
-        dicc_participante = {}
-       
-        dicc_participante ["ID participante"] = int(id_participante)
-        
-        if dicc_participante ["ID participante"] not in dicc_participante:
-            dicc_participante ["Tiempo"] = [float(tiempo)]
-            dicc_participante["Valor"] = [float(valor)]
-            dicc_participante ["Fase"] = [fase]
-            dicc_participante ["Condición"] = condicion_experimental
-            dicc_participante ["Hit"] = [hit]
-        
-        else:
-            dicc_participante["Tiempo"].append(float(tiempo))
-            dicc_participante["Valor"].append(float(valor))
-            dicc_participante["Fase"].append (fase)
-            dicc_participante["Hit"].append(hit)
     
-        return dicc_participante
-
-    else:
+    if len(linea.strip()) == 0: 
         return None
+    
+    linea = linea.strip("\n")
+    id_participante, tiempo, valor, fase, condicion_experimental, hit = linea.split(",")
+        
+    dicc_participante = {
+        "ID participante": int(id_participante),
+        "Tiempo": [float(tiempo)],
+        "Valor": [float(valor)],
+        "Fase": [fase],
+        "Condición": condicion_experimental,
+        "Hit": [bool(hit)]}
+    
+    return dicc_participante
 
 
 
