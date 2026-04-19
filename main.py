@@ -23,7 +23,7 @@ except Exception as e:
 
 while True:
     
-    id_inicial = input("¿Desea analizar todos los ID? (s/n): ")
+    id_inicial = input("¿Desea analizar todos los ID? (s/n): ").lower()
 
     if id_inicial == 's':
         for i in ruta.readlines:
