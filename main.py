@@ -52,6 +52,9 @@ if todos_los_datos is not None:
     todos_los_datos = cargar_datos(ruta)
     
     datos_participante = filtrar_por_participante(todos_los_datos, id_trabajado)
+    
+    if datos_participante == None:
+        print(f"El ID {id_trabajado} no se encuentra en la lista de participantes.")
        
     promedio_ecg = calcular_promedio_senal(datos_participante["valor"])
             
