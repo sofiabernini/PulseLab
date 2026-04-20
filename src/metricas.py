@@ -9,7 +9,7 @@ Created on Fri Mar 27 11:33:57 2026
 from src.función_detectar_picos import detectar_picos_qrs
 
 
-def calcular_promedio_senal(datos: list) -> float:
+def calcular_promedio_senal(datos):
     """
     Calcula el promedio de las senales ECG
 
@@ -32,13 +32,13 @@ def calcular_promedio_senal(datos: list) -> float:
         cantidad += 1
  
     if cantidad == 0:
-        return ("La lista esta vacia")
+        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia.| Ubicación: función calcular_promedio_senal")
     
-    promedio= suma/cantidad
+    promedio = suma/cantidad
 
     return promedio
 
-def calcular_maximo_senal(datos: list) -> float:
+def calcular_maximo_senal(datos):
     """
     Calcula cual es la senal mas alta
 
@@ -61,12 +61,12 @@ def calcular_maximo_senal(datos: list) -> float:
             maximo= i
     
     if maximo == None:
-        return ("La lista esta vacia")
+        raise("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
     
     else:
         return maximo
         
-def calcular_minimo_senal(datos: list) -> float:
+def calcular_minimo_senal(datos):
     """
     Calcula cual es la senal mas baja
 
@@ -89,13 +89,13 @@ def calcular_minimo_senal(datos: list) -> float:
             
     
     if minimo == None:
-        return ("La lista esta vacia")
+        raise ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")
     
     else:
         return minimo
     
 
-def calcular_frecuencia_cardiaca(picos: list) -> float:
+def calcular_frecuencia_cardiaca(picos):
     """
     Calcula la frecuencia cardiaca.
 
@@ -111,7 +111,7 @@ def calcular_frecuencia_cardiaca(picos: list) -> float:
 
     """
     if len(picos) < 2:
-        return ("No hay suficientes datos para calcular la frecuencia")
+        raise ("[ERROR CRÍTICO] Tipo de error encontrado: No hay suficientes datos para calcular la frecuencia | Ubicación: funcion calcular_frecuencia_cardiaca")
 
     tiempo_total = picos[-1] - picos[0]
     cantidad_latidos = len(picos)
