@@ -23,8 +23,8 @@ def filtrar_por_participante(datos, id_participante):
         Es el diccionario con los datos del id del participante buscado.
     None
         Si el id buscado no está en la lista datos.
-    Errores: ValueError
-        Si la lista de datos está vacía
+    Raises: 
+        ValueError: Si la lista de datos está vacía
 
     """
     if len(datos)==0:
