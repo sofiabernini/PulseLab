@@ -109,7 +109,7 @@ def parsear_linea (linea):
         id_participante, tiempo, valor, fase, condicion_experimental, hit = partes
            
     except ValueError:
-        raise ValueError("La cantidad de columnas no coincide con la cantidad de datos")
+        raise ValueError(f"Se esperaban 6 columnas pero la cantidad de columnas actual es: {len(partes)} en la linea {linea}.")
         
 #creo el diccionario del participante vacío
     dicc_participante = {}
