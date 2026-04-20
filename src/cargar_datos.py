@@ -102,7 +102,7 @@ def parsear_linea (linea):
     
 #esto maneja el error de que los valores de las lineas no coincidan con la cantidad de columnas
     try:
-        linea = linea.strip ()
+        linea = linea.strip()
         partes = linea.split(",")
         if len(partes)!=6:
             raise ValueError ("La cantidad de columnas no coincide con la cantidad de datos")
@@ -165,7 +165,7 @@ def parsear_linea (linea):
     dicc_participante["Fase"] = [fase]
 
 #estos if validan el valor de la variable 'condicion_experimental'. si el valor es correcto, se crea la clave y el valor asociado
-    if condicion_experimental.strip == "":
+    if condicion_experimental.strip() == "":
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La variable 'condicion_experimental' está vacía  | Ubicación: función parsear_lineas(linea)")
     
     if condicion_experimental.lower() != "competencia" and condicion_experimental.lower() !="cooperacion":
