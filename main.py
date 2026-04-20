@@ -57,13 +57,13 @@ if todos_los_datos is not None:
         print(f"El ID {id_trabajado} no se encuentra en la lista de participantes.")
     
        
-    promedio_ecg = calcular_promedio_senal(datos_participante["valor"])
+    promedio_ecg = calcular_promedio_senal(datos_participante["Valor ECG"])
             
     frecuencia_cardiaca = calcular_fc_desde_datos(datos_participante)
 
-    maximo_senal = calcular_maximo_senal(datos_participante["valor"])
+    maximo_senal = calcular_maximo_senal(datos_participante["Valor ECG"])
 
-    minimo_senal = calcular_minimo_senal(datos_participante["valor"])
+    minimo_senal = calcular_minimo_senal(datos_participante["Valor ECG"])
 
             
     print(f"Resultados del participante {id_trabajado}: ")
