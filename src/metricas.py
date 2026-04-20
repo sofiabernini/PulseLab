@@ -149,10 +149,12 @@ def calcular_fc_desde_datos(datos):
     tiempos = []
     senal = []
 
-    for d in datos:
-        tiempos.append(d["tiempo"])
-        senal.append(d["valor"])
+    for d in datos["Tiempo"]:
+        tiempos.append(d)
 
+    for d in datos["Valor ECG"]:
+        senal.append(d)
+        
     picos = detectar_picos_qrs(tiempos, senal)
 
 

@@ -11,6 +11,33 @@ from src.metricas import calcular_promedio_senal, calcular_maximo_senal, calcula
 ruta = "datos/PulseLab_mock_data.csv"
 todos_los_datos = None
 
+def ejecutar_programa (id_trabajado,todos_los_datos):
+    
+    if todos_los_datos is not None:
+        
+        datos_participante = filtrar_por_participante(todos_los_datos, id_trabajado)
+        
+        if datos_participante == None:
+            print(f"El ID {id_trabajado} no se encuentra en la lista de participantes.")
+        
+           
+        promedio_ecg = calcular_promedio_senal(datos_participante["Valor ECG"])
+                
+        frecuencia_cardiaca = calcular_fc_desde_datos(datos_participante)
+    
+        maximo_senal = calcular_maximo_senal(datos_participante["valor"])
+    
+        minimo_senal = calcular_minimo_senal(datos_participante["valor"])
+    
+                
+        print(f"Resultados del participante {id_trabajado}: ")
+        print(f"Máximo de la señal ECG: {maximo_senal}")
+        print(f"Mínimo de la señal ECG: {minimo_senal}")
+        print(f"Promedio de la señal ECG: {promedio_ecg}")
+        print(f"Frecuencia Cardíaca: {frecuencia_cardiaca} BPM")
+        
+    else:
+        print("No se pudo proceder porque no hay datos cargados.")
 
 try:
     todos_los_datos = cargar_datos(ruta)
@@ -27,8 +54,8 @@ while True:
 
     if id_inicial == 's':
         for i in todos_los_datos:
-            id_trabajado = i[0]
-            id_total = filtrar_por_participante(todos_los_datos, id_trabajado)
+            id_posta = i['ID participante']
+            ejecutar_programa(id_posta, todos_los_datos)
         break
     
     elif id_inicial == 'n':
@@ -36,6 +63,7 @@ while True:
         try:
             id_a_analizar = int(input("Ingrese el ID del participante: "))
             id_trabajado = id_a_analizar
+            ejecutar_programa(id_trabajado, todos_los_datos)
             break
        
         except ValueError:
@@ -44,33 +72,3 @@ while True:
         
     else:
         print("Si desea analizar todos los ID escriba 's' sino 'n'.")
-
-
-
-if todos_los_datos is not None:
-    
-    todos_los_datos = cargar_datos(ruta)
-    
-    datos_participante = filtrar_por_participante(todos_los_datos, id_trabajado)
-    
-    if datos_participante == None:
-        print(f"El ID {id_trabajado} no se encuentra en la lista de participantes.")
-    
-       
-    promedio_ecg = calcular_promedio_senal(datos_participante["Valor ECG"])
-            
-    frecuencia_cardiaca = calcular_fc_desde_datos(datos_participante)
-
-    maximo_senal = calcular_maximo_senal(datos_participante["Valor ECG"])
-
-    minimo_senal = calcular_minimo_senal(datos_participante["Valor ECG"])
-
-            
-    print(f"Resultados del participante {id_trabajado}: ")
-    print(f"Máximo de la señal ECG: {maximo_senal}")
-    print(f"Mínimo de la señal ECG: {minimo_senal}")
-    print(f"Promedio de la señal ECG: {promedio_ecg}")
-    print(f"Frecuencia Cardíaca: {frecuencia_cardiaca} BPM")
-    
-else:
-    print("No se pudo proceder porque no hay datos cargados.")
