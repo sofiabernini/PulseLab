@@ -60,7 +60,7 @@ def calcular_maximo_senal(datos):
         if i > maximo:
             maximo= i
     
-    if maximo == None:
+    if len(datos)==0:
         raise("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
     
     else:
@@ -81,15 +81,15 @@ def calcular_minimo_senal(datos):
         Sale el valor mas bajo de la lista.
 
     """
-    minimo= None
+    minimo= 999999
     
     for x in datos:
         if x < minimo:
             minimo= x
             
     
-    if minimo == None:
-        raise ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")
+    if len(datos)==0:
+        raise("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
     
     else:
         return minimo
