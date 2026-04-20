@@ -164,7 +164,7 @@ def parsear_linea (linea):
     if condicion_experimental.strip == "":
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La variable 'condicion_experimental' está vacía  | Ubicación: función parsear_lineas(linea)")
     
-    if condicion_experimental.lower != "competencia" and condicion_experimental.lower() != "cooperacion":
+    if condicion_experimental.lower() != "competencia" and condicion_experimental.lower() !="cooperacion":
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La variable 'condicion_experimental' no tiene el valor correspondiente a 'cooperación' o 'competencia' | Ubicación: función parsear_lineas(linea)")
         
     dicc_participante["Condicion experimental"] = condicion_experimental
