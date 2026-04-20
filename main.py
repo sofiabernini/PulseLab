@@ -26,7 +26,7 @@ while True:
     id_inicial = input("¿Desea analizar todos los ID? (s/n): ").lower()
 
     if id_inicial == 's':
-        for i in ruta.readlines:
+        for i in todos_los_datos:
             id_trabajado = i[0]
             id_total = filtrar_por_participante(todos_los_datos, id_trabajado)
         break
@@ -55,6 +55,7 @@ if todos_los_datos is not None:
     
     if datos_participante == None:
         print(f"El ID {id_trabajado} no se encuentra en la lista de participantes.")
+    
        
     promedio_ecg = calcular_promedio_senal(datos_participante["valor"])
             
