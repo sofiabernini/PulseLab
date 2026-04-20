@@ -127,7 +127,7 @@ def parsear_linea (linea):
     if id_participante <= 0:
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: ID debe ser mayor a 0 | Ubicación: función parsear_lineas(linea)")
         
-    dicc_participante["ID participante"] = [id_participante]
+    dicc_participante["ID participante"] = id_participante
     
 #estos if y try validan el valor de tiempo. si el valor es correcto, se crea la clave y el valor asociado
     if tiempo.strip() == "":
