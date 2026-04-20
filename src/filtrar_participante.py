@@ -28,7 +28,7 @@ def filtrar_por_participante(datos, id_participante):
 
     """
     if len(datos)==0:
-        raise ValueError("[ERROR CRÍTICO] Tipo de error encontrado: La lista de datos está vacía. Ubicación: función filtrar_por_participante")
+        raise ValueError("La lista de datos está vacía.")
     for registro in datos: 
         if registro["ID participante"]== id_participante:
             return registro
