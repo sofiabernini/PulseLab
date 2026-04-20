@@ -30,7 +30,7 @@ def filtrar_por_participante(datos, id_participante):
     if len(datos)==0:
         raise ValueError("La lista de datos está vacía")
     for registro in datos: 
-        if registro["id_participante"]== id_participante:
+        if registro["ID participante"]== id_participante:
             return registro
     return None
 
