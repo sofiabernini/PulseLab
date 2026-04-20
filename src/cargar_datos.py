@@ -49,7 +49,7 @@ def cargar_datos (ruta_archivo):
         try:
             dato = parsear_linea(linea)
         except ValueError as e:
-            raise ValueError (f"Error en parseado de linea: {e}")
+            raise ValueError (f"[ERROR CRÍTICO]: Tipo de error encontrado: Error en parseado de linea: {e}")
         
         encontrado = False
         
@@ -102,7 +102,7 @@ def parsear_linea (linea):
     
 #esto maneja el error de que los valores de las lineas no coincidan con la cantidad de columnas
     try:
-        linea = linea.strip("\n")
+        linea = linea.strip()
         id_participante, tiempo, valor, fase, condicion_experimental, hit = linea.split(",")
     except ValueError:
         raise ValueError ("La cantidad de columnas no coincide con la cantidad de datos")
@@ -123,7 +123,7 @@ def parsear_linea (linea):
     if id_participante <= 0:
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: ID debe ser mayor a 0 | Ubicación: función parsear_lineas(linea)")
         
-    dicc_participante["ID participante"] = id_participante
+    dicc_participante["ID participante"] = [id_participante]
     
 #estos if y try validan el valor de tiempo. si el valor es correcto, se crea la clave y el valor asociado
     if tiempo.strip() == "":
