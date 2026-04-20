@@ -49,6 +49,6 @@ El programa produce los siguiente resultados:
 
 Errores y Validaciones:
 
-* En el programa principal, se considera y se prevee el caso en el que haya errores dentro del archivo con los datos del proyecto o que el ID que se ingrese no sea un número entero como es pedido.
+* En el programa principal, se considera y se prevee el caso en el que haya errores dentro del archivo con los datos del proyecto o que el ID que se ingrese no exista en los datos, o no sea un número entero como es pedido.
 * En el archivo cargar\_datos.py, en la función cargar\_datos(ruta\_archivo) se utilizó un bloque try/except para controlar un posible error en la apertura del archivo a partir de la ruta ingresada por parámetro. Luego, utilizando la función parsear\_lineas(linea) se puede manejar el caso de tener una linea vacía. Si la linea está vacía, no se incluye dentro de la lista de participantes. Si todo el archivo está vacío (no hay ningún valor en la lista de participantes) la función cargar\_datos devuelve None.
 
