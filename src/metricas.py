@@ -54,7 +54,7 @@ def calcular_maximo_senal(datos):
 
     """
     
-    maximo= None
+    maximo= -999999
     
     for i in datos:
         if i > maximo:
