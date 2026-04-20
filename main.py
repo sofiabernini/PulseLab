@@ -38,7 +38,7 @@ while True:
             id_trabajado = id_a_analizar
             break
        
-        except TypeError:
+        except ValueError:
             print("El ID debe ser un número entero.")
             break
         
