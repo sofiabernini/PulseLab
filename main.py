@@ -26,7 +26,7 @@ while True:
     id_inicial = input("¿Desea analizar todos los ID? (s/n): ").lower()
 
     if id_inicial == 's':
-        for i in ruta.readlines:
+        for i in todos_los_datos:
             id_trabajado = i[0]
             id_total = filtrar_por_participante(todos_los_datos, id_trabajado)
         break
