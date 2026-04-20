@@ -102,10 +102,14 @@ def parsear_linea (linea):
     
 #esto maneja el error de que los valores de las lineas no coincidan con la cantidad de columnas
     try:
-        linea = linea.strip()
-        id_participante, tiempo, valor, fase, condicion_experimental, hit = linea.split(",")
+        linea = linea.strip ()
+        partes = linea.split(",")
+        if len(partes)!=6:
+            raise ValueError ("La cantidad de columnas no coincide con la cantidad de datos")
+        id_participante, tiempo, valor, fase, condicion_experimental, hit = partes
+           
     except ValueError:
-        raise ValueError ("La cantidad de columnas no coincide con la cantidad de datos")
+        raise ValueError("La cantidad de columnas no coincide con la cantidad de datos")
         
 #creo el diccionario del participante vacío
     dicc_participante = {}
