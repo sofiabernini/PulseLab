@@ -53,3 +53,15 @@ Errores y Validaciones:
 * En la función se manejaron los errores y se validaron todos los datos correspondientes para el funcionamiento del programa. Esto incluye, 1) validar el tipo de dato de la ruta ingresada por parámetro y que que el archivo abra con la ruta indicada  2) que el archivo no esté vacío, 3) que la función parsear_lineas maneje y propague errores de transformación de datos vacíos o de tipos de datos/rangos de datos 5) agregar la función validar_tiempos_crecientes para validar consistencia temporal de los participantes
 * En la función filtrar_por_participante se manejaron dos posibles errores. 1) Que la lista esté vacía: si la longitud/cantidad de elementos de la lista es igual a cero, entonces se ejecuta un raise que indica que la lista está vacía. 2) Que el id buscado no esté en la lista de datos: se recorre la lista y si se encuentra un id igual al id buscado en uno de los valores de la clave ["ID participante"], entonces se devuelve el diccionario, en caso contrario se devuelve None.
 
+OBJETOS QUE SE PODRIAN USAR
+
+Objeto: donde se va a guardar informacion 
+* Participante
+
+Atributos: la informacion que sera guardada en el objeto
+* ID
+* Tiempo
+* Valor
+* Fase 
+* Condición
+* Hit
