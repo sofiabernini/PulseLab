@@ -56,7 +56,7 @@ def cargar_datos (ruta_archivo):
         for participante in lista_participantes:
             if participante["ID participante"] == dato["ID participante"]:
                 participante["Tiempo"].append(dato["Tiempo"][0])
-                participante["Valor ECG"].append(dato["Valor"][0])
+                participante["Valor ECG"].append(dato["Valor ECG"][0])
                 participante["Fase"].append(dato["Fase"][0])
                 participante["Hit"].append(dato["Hit"][0])
                 
@@ -167,7 +167,7 @@ def parsear_linea (linea):
     if condicion_experimental.lower() != "competencia" and condicion_experimental.lower() !="cooperacion":
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La variable 'condicion_experimental' no tiene el valor correspondiente a 'cooperación' o 'competencia' | Ubicación: función parsear_lineas(linea)")
         
-    dicc_participante["Condicion experimental"] = condicion_experimental
+    dicc_participante["Condicion experimental"] = [condicion_experimental]
     
 #estos if validan el valor de hit y lo transforman en booleano. si el valor es correcto, se crea la clave y el valor asociado
     if hit.strip() == "":
