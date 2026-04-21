@@ -31,20 +31,26 @@ def calcular_promedio_senal(datos):
     suma = 0
     cantidad = 0
     
-    if cantidad == 0:
+    if len(datos) == 0:
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia.| Ubicación: función calcular_promedio_senal")
     
-    for d in datos:
-        try:
+    
+    try:
+        for d in datos:
             suma += d
             cantidad += 1
             promedio = suma/cantidad
     
-        except TypeError:
-            raise TypeError("No es valor float")
+    except TypeError:
+        raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: No pueden realizarse las operaciones porque alguno de los valores empleados no es un float | Ubicación: función calcular_promedio_senal.")
+        
+    except ZeroDivisionError:
+        raise ZeroDivisionError ("[ERROR CRÍTICO] Tipo de error encontrado: No se puede dividir por 0 | Ubicación: función calcular_promedio_senal")
+        
+    else:
+        return promedio
     
-    return promedio
-
+    
 def calcular_maximo_senal(datos):
     """
     Calcula cual es la senal mas alta
@@ -66,6 +72,7 @@ def calcular_maximo_senal(datos):
 
     """
     
+<<<<<<< HEAD
     maximo= -999999
     
 <<<<<<< HEAD
@@ -82,11 +89,20 @@ def calcular_maximo_senal(datos):
     
     for i in datos:
         try:
+=======
+    maximo= datos[0]
+    
+    if len(datos)==0:
+        raise ValueError("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
+  
+    try:
+        for i in datos:
+>>>>>>> 5e278169c181603a91f4e9185b0c85f7ccba1292
             if i > maximo:
-            maximo= i
+                maximo= i
         
-        except:
-            raise TypeError("No esta en float")
+    except ValueError:
+        raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: El valor de la lista que se busca comparar no es del tipo correcto.| Ubicación: función calcular_maximo_senal ")
     
     return maximo
         
@@ -109,6 +125,7 @@ def calcular_minimo_senal(datos):
         Sale el valor mas bajo de la lista.
 
     """
+<<<<<<< HEAD
 <<<<<<< HEAD
     minimo= None
     raise ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")os:
@@ -133,6 +150,25 @@ def calcular_minimo_senal(datos):
     else:
         return minimo
 >>>>>>> f57e99cdcc5589211e921363642e6ba572311965
+=======
+
+    minimo= datos[0]
+
+    if len(datos) == 0:
+        raise ValueError ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")
+        
+    try:
+        for i in datos: 
+            if i < minimo:
+                minimo = i
+        
+    except TypeError:
+        raise TypeError("[ERROR CRÍTICO]: Tipo de error encontrado:| Ubicación: función cargar_minimo_senal")
+        
+    else:
+        return minimo
+
+>>>>>>> 5e278169c181603a91f4e9185b0c85f7ccba1292
     
 
 def calcular_frecuencia_cardiaca(picos):
@@ -162,7 +198,7 @@ def calcular_frecuencia_cardiaca(picos):
     cantidad_latidos = len(picos)
 
     if tiempo_total == 0:
-        raise ZeroDivisionError("No se puede dividir por 0")
+        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: No se puede dividir por 0 | Ubicación: funcion calcular_frecuencia_cardiaca")
 
        
     frecuencia = cantidad_latidos / tiempo_total
@@ -172,35 +208,31 @@ def calcular_frecuencia_cardiaca(picos):
     return frecuencia_bpm
 
 def calcular_fc_desde_datos(datos):
-    """
+   """
     
 
     Parameters
     ----------
     datos : TYPE
->>>>>>> Stashed changes
         DESCRIPTION.
 
     Returns
     -------
-<<<<<<< Updated upstream
-    float
-=======
     TYPE
->>>>>>> Stashed changes
         DESCRIPTION.
 
     """
-    tiempos = []
-    senal = []
+    
+   tiempos = []
+   senal = []
 
-    for d in datos["Tiempo"]:
+   for d in datos["Tiempo"]:
         tiempos.append(d)
 
-    for d in datos["Valor ECG"]:
+   for d in datos["Valor ECG"]:
         senal.append(d)
         
-    picos = detectar_picos_qrs(tiempos, senal)
+   picos = detectar_picos_qrs(tiempos, senal)
 
 
-    return calcular_frecuencia_cardiaca(picos)
+   return calcular_frecuencia_cardiaca(picos)
