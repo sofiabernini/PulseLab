@@ -25,9 +25,9 @@ def ejecutar_programa (id_trabajado,todos_los_datos):
                 
         frecuencia_cardiaca = calcular_fc_desde_datos(datos_participante)
     
-        maximo_senal = calcular_maximo_senal(datos_participante["valor"])
+        maximo_senal = calcular_maximo_senal(datos_participante["Valor ECG"])
     
-        minimo_senal = calcular_minimo_senal(datos_participante["valor"])
+        minimo_senal = calcular_minimo_senal(datos_participante["Valor ECG"])
     
                 
         print(f"Resultados del participante {id_trabajado}: ")
