@@ -32,7 +32,7 @@ def calcular_promedio_senal(datos):
     suma = 0
     cantidad = 0
     
-    if datos= None:
+    if datos == None:
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: No existe el participante.| Ubicación: función calcular_promedio_senal")
      
     if len(datos) == 0:
