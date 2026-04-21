@@ -31,7 +31,7 @@ def calcular_promedio_senal(datos):
     suma = 0
     cantidad = 0
     
-    if cantidad == 0:
+    if len(datos) == 0:
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia.| Ubicación: función calcular_promedio_senal")
     
     
