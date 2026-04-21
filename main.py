@@ -15,11 +15,15 @@ def ejecutar_programa (id_trabajado,todos_los_datos):
     
     if todos_los_datos is not None:
         
-        datos_participante = filtrar_por_participante(todos_los_datos, id_trabajado)
+        try:
+            datos_participante = filtrar_por_participante(todos_los_datos, id_trabajado)
         
+        except ValueError as e:
+            print (e)
+            
         if datos_participante == None:
             print(f"El ID {id_trabajado} no se encuentra en la lista de participantes.")
-        
+            
            
         promedio_ecg = calcular_promedio_senal(datos_participante["Valor ECG"])
                 
