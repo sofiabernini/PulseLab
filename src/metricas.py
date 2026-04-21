@@ -34,11 +34,12 @@ def calcular_promedio_senal(datos):
     if cantidad == 0:
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia.| Ubicación: función calcular_promedio_senal")
     
-    for d in datos:
+    
         try:
-            suma += d
-            cantidad += 1
-            promedio = suma/cantidad
+            for d in datos:
+                suma += d
+                cantidad += 1
+                promedio = suma/cantidad
     
         except TypeError:
             raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: No pueden realizarse las operaciones porque alguno de los valores empleados no es un float | Ubicación: función calcular_promedio_senal.")
