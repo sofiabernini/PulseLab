@@ -176,16 +176,17 @@ def calcular_fc_desde_datos(datos):
         DESCRIPTION.
 
     """
-    tiempos = []
-    senal = []
+    
+   tiempos = []
+   senal = []
 
-    for d in datos["Tiempo"]:
+   for d in datos["Tiempo"]:
         tiempos.append(d)
 
-    for d in datos["Valor ECG"]:
+   for d in datos["Valor ECG"]:
         senal.append(d)
         
-    picos = detectar_picos_qrs(tiempos, senal)
+   picos = detectar_picos_qrs(tiempos, senal)
 
 
-    return calcular_frecuencia_cardiaca(picos)
+   return calcular_frecuencia_cardiaca(picos)
