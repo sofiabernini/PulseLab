@@ -35,20 +35,20 @@ def calcular_promedio_senal(datos):
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia.| Ubicación: función calcular_promedio_senal")
     
     
-        try:
-            for d in datos:
-                suma += d
-                cantidad += 1
-                promedio = suma/cantidad
+    try:
+        for d in datos:
+            suma += d
+            cantidad += 1
+            promedio = suma/cantidad
     
-        except TypeError:
-            raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: No pueden realizarse las operaciones porque alguno de los valores empleados no es un float | Ubicación: función calcular_promedio_senal.")
+    except TypeError:
+        raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: No pueden realizarse las operaciones porque alguno de los valores empleados no es un float | Ubicación: función calcular_promedio_senal.")
         
-        except ZeroDivisionError:
-            raise ZeroDivisionError ("[ERROR CRÍTICO] Tipo de error encontrado: No se puede dividir por 0 | Ubicación: función calcular_promedio_senal")
+    except ZeroDivisionError:
+        raise ZeroDivisionError ("[ERROR CRÍTICO] Tipo de error encontrado: No se puede dividir por 0 | Ubicación: función calcular_promedio_senal")
         
-        else:
-            return promedio
+    else:
+        return promedio
     
     
 def calcular_maximo_senal(datos):
@@ -77,13 +77,13 @@ def calcular_maximo_senal(datos):
     if len(datos)==0:
         raise ValueError("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
   
-    for i in datos:
-        try:
+    try:
+        for i in datos:
             if i > maximo:
                 maximo= i
         
-        except:
-            raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: El valor de la lista que se busca comparar no es del tipo correcto.| Ubicación: función calcular_maximo_senal ")
+    except ValueError:
+        raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: El valor de la lista que se busca comparar no es del tipo correcto.| Ubicación: función calcular_maximo_senal ")
     
     return maximo
         
@@ -112,17 +112,14 @@ def calcular_minimo_senal(datos):
     if len(datos) == 0:
         raise ValueError ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")
         
-    for i in datos: 
-        try:
+    try:
+        for i in datos: 
             if i < minimo:
                 minimo = i
         
-        except:
-            raise TypeError("[ERROR CRÍTICO]: Tipo de error encontrado:| Ubicación: función cargar_minimo_senal")
-    
-    if len(datos)==0:
-        raise("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia: El valor de la lista que se busca comparar no es del tipo correcto | Ubicación: función calcular_maximo_senal")
-    
+    except TypeError:
+        raise TypeError("[ERROR CRÍTICO]: Tipo de error encontrado:| Ubicación: función cargar_minimo_senal")
+        
     else:
         return minimo
 
@@ -165,21 +162,17 @@ def calcular_frecuencia_cardiaca(picos):
     return frecuencia_bpm
 
 def calcular_fc_desde_datos(datos):
-    """
+   """
     
+
     Parameters
     ----------
     datos : TYPE
->>>>>>> Stashed changes
         DESCRIPTION.
 
     Returns
     -------
-<<<<<<< Updated upstream
-    float
-=======
     TYPE
->>>>>>> Stashed changes
         DESCRIPTION.
 
     """
