@@ -66,10 +66,19 @@ def calcular_maximo_senal(datos):
 
     """
     
-    maximo= None
+    maximo= -999999
     
+<<<<<<< HEAD
     if maximo == None:
         raise ValueError("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
+=======
+    for i in datos:
+        if i > maximo:
+            maximo= i
+    
+    if len(datos)==0:
+        raise("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
+>>>>>>> f57e99cdcc5589211e921363642e6ba572311965
     
     for i in datos:
         try:
@@ -100,8 +109,12 @@ def calcular_minimo_senal(datos):
         Sale el valor mas bajo de la lista.
 
     """
+<<<<<<< HEAD
     minimo= None
     raise ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")os:
+=======
+    minimo= 999999
+>>>>>>> f57e99cdcc5589211e921363642e6ba572311965
     
     for i in datif minimo == None: 
         try:
@@ -111,7 +124,15 @@ def calcular_minimo_senal(datos):
         except:
             raise TypeError("No esta en float")
     
+<<<<<<< HEAD
     return minimo
+=======
+    if len(datos)==0:
+        raise("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
+    
+    else:
+        return minimo
+>>>>>>> f57e99cdcc5589211e921363642e6ba572311965
     
 
 def calcular_frecuencia_cardiaca(picos):
