@@ -41,7 +41,10 @@ def calcular_promedio_senal(datos):
             promedio = suma/cantidad
     
         except TypeError:
-            raise TypeError("No es valor float")
+            raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: No pueden realizarse las operaciones porque alguno de los valores empleados no es un float | Ubicación: función calcular_promedio_senal.")
+        
+        except ZeroDivisionError:
+            raise ZeroDivisionError ("[ERROR CRÍTICO] Tipo de error encontrado: No se puede dividir por 0 | Ubicación: función calcular_promedio_senal")
     
     return promedio
 
@@ -66,27 +69,18 @@ def calcular_maximo_senal(datos):
 
     """
     
-    maximo= -999999
-    
-<<<<<<< HEAD
-    for i in datos:
-        if i > maximo:
-            maximo= i
+    maximo= datos[0]
     
     if len(datos)==0:
-        raise("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
-=======
-    if maximo == None:
         raise ValueError("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
->>>>>>> 94d759c40c94063ddd6a7f5428858769f52e5ed8
-    
+  
     for i in datos:
         try:
             if i > maximo:
-            maximo= i
+                maximo= i
         
         except:
-            raise TypeError("No esta en float")
+            raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: El valor de la lista que se busca comparar no es del tipo correcto.| Ubicación: función calcular_maximo_senal ")
     
     return maximo
         
@@ -109,30 +103,26 @@ def calcular_minimo_senal(datos):
         Sale el valor mas bajo de la lista.
 
     """
-<<<<<<< HEAD
-    minimo= 999999
-=======
-    minimo= None
-    raise ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")os:
->>>>>>> 94d759c40c94063ddd6a7f5428858769f52e5ed8
-    
-    for i in datif minimo == None: 
+
+    minimo= datos[0]
+
+    if len(datos) == 0:
+        raise ValueError ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")
+        
+    for i in datos: 
         try:
             if i < minimo:
-            maximo= i
+                minimo = i
         
         except:
-            raise TypeError("No esta en float")
+            raise TypeError("[ERROR CRÍTICO]: Tipo de error encontrado:| Ubicación: función cargar_minimo_senal")
     
-<<<<<<< HEAD
     if len(datos)==0:
-        raise("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
+        raise("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia: El valor de la lista que se busca comparar no es del tipo correcto | Ubicación: función calcular_maximo_senal")
     
     else:
         return minimo
-=======
-    return minimo
->>>>>>> 94d759c40c94063ddd6a7f5428858769f52e5ed8
+
     
 
 def calcular_frecuencia_cardiaca(picos):
@@ -162,7 +152,7 @@ def calcular_frecuencia_cardiaca(picos):
     cantidad_latidos = len(picos)
 
     if tiempo_total == 0:
-        raise ZeroDivisionError("No se puede dividir por 0")
+        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: No se puede dividir por 0 | Ubicación: funcion calcular_frecuencia_cardiaca")
 
        
     frecuencia = cantidad_latidos / tiempo_total
@@ -174,7 +164,6 @@ def calcular_frecuencia_cardiaca(picos):
 def calcular_fc_desde_datos(datos):
     """
     
-
     Parameters
     ----------
     datos : TYPE
