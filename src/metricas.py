@@ -46,9 +46,11 @@ def calcular_promedio_senal(datos):
         
         except ZeroDivisionError:
             raise ZeroDivisionError ("[ERROR CRÍTICO] Tipo de error encontrado: No se puede dividir por 0 | Ubicación: función calcular_promedio_senal")
+        
+        else:
+            return promedio
     
-    return promedio
-
+    
 def calcular_maximo_senal(datos):
     """
     Calcula cual es la senal mas alta
