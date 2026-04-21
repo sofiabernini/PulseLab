@@ -20,6 +20,7 @@ def calcular_promedio_senal(datos):
         
     Raises:
         ValueError: si la lista esta vacia
+        ValueError: si no hay lista de participantes
         TypeError: si no es valor float
 
     Returns
@@ -31,10 +32,13 @@ def calcular_promedio_senal(datos):
     suma = 0
     cantidad = 0
     
+    if datos= None:
+        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: No existe el participante.| Ubicación: función calcular_promedio_senal")
+     
     if len(datos) == 0:
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia.| Ubicación: función calcular_promedio_senal")
     
-    
+       
     try:
         for d in datos:
             suma += d
