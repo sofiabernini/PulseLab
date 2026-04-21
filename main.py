@@ -12,6 +12,21 @@ ruta = "datos/PulseLab_mock_data.csv"
 todos_los_datos = None
 
 def ejecutar_programa (id_trabajado,todos_los_datos):
+    """
+    Ejecuta el programa para todos los ID o para uno solo según lo decida el usuario.
+
+    Parameters
+    ----------
+    id_trabajado : int
+        ID del participante que se va a analizar
+    todos_los_datos : list
+        Lista con todos los datos del participante
+
+    Returns
+    -------
+    None.
+
+    """
     
     if todos_los_datos is not None:
         
