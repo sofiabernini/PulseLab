@@ -40,8 +40,8 @@ def cargar_datos (ruta_archivo):
         raise FileNotFoundError ("[ERROR CRÍTICO] Tipo de error encontrado: La ruta ingresada no es correcta para abrir el archivo | Ubicación: función cargar_datos(ruta_archivo)")
                
     if len(lineas) == 0:
-        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: El archivo no contiene lineas | Ubicación: función cargar_datos (ruta_archivo)")
-        
+        return "El archivo que se abre con la ruta de archivo provista no contiene líneas"      
+    
     lista_participantes = []
    
 # este bloque "recibe" los raises de la función de parsear_lineas y lanza una excepcion al programa principal si algún dato viene con un error (además de especificarlo)
