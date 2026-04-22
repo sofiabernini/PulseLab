@@ -17,8 +17,8 @@ def cargar_datos (ruta_archivo):
 
     Returns
     -------
-    lista_participantes : lista (de diccionarios) si tiene valores
-    None: si el archivo no se puede abrir o si el archivo no tiene lineas para parsear
+    lista_participantes : lista (de diccionarios) tiene valores válidos y contiene datos.
+    "El archivo que se abre con la ruta de archivo provista no contiene lineas": si el archivo no tiene lineas para parsear
     
     Raises:
         TyperError: si la ruta ingresada por parametro no es un string
@@ -98,18 +98,20 @@ def parsear_linea (linea):
     
 #esto contempla que la linea tenga un len pero de espacios vacíos, o de tabs
     if len(linea.strip()) == 0: 
-        raise ValueError ("La linea está vacía")
+        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La linea está vacía | Ubicación: función parsear_lineas(linea)")
     
 #esto maneja el error de que los valores de las lineas no coincidan con la cantidad de columnas
     try:
         linea = linea.strip()
         partes = linea.split(",")
-        if len(partes)!=6:
-            raise ValueError ("La cantidad de columnas no coincide con la cantidad de datos")
-        id_participante, tiempo, valor, fase, condicion_experimental, hit = partes
-           
     except ValueError:
-        raise ValueError(f"Se esperaban 6 columnas pero la cantidad de columnas actual es: {len(partes)} en la linea {linea}.")
+        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: No pudo dividirse la cantidad de columnas con comas. | Ubicación: Función parsear_lineas")
+        
+    if len(partes)!=6:
+        raise ValueError (f"[ERROR CRÍTICO] Tipo de error encontrado: Se esperaban 6 columnas pero la cantidad de columnas actual es: {len(partes)} en la linea {linea}. | Ubicación: Función parsear_lineas")
+    
+    id_participante, tiempo, valor, fase, condicion_experimental, hit = partes
+           
         
 #creo el diccionario del participante vacío
     dicc_participante = {}
