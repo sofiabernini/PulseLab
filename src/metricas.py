@@ -83,7 +83,7 @@ def calcular_maximo_senal(datos):
             if i > maximo:
                 maximo= i
         
-        except ValueError:
+        except TypeError:
             raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: El valor de la lista que se busca comparar no es del tipo correcto.| Ubicación: función calcular_maximo_senal ")
     
     return maximo
@@ -167,13 +167,13 @@ def calcular_fc_desde_datos(datos):
 
     Parameters
     ----------
-    datos : TYPE
-        DESCRIPTION.
+    datos : lista
+        lista de datos.
 
     Returns
     -------
-    TYPE
-        DESCRIPTION.
+    diccio
+        llama a otra funcion.
 
     """
     
