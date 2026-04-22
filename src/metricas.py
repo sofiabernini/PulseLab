@@ -65,7 +65,8 @@ def calcular_maximo_senal(datos):
 
         ValueError: si la lista esta vacia
         TypeError: si no es valor float
-
+        ValueError: si no hay lista de participantes
+        
     Returns
     -------
     float
@@ -74,7 +75,10 @@ def calcular_maximo_senal(datos):
     """
     
     maximo= datos[0]
-    
+   
+    if datos == None:
+        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: No existe el participante.| Ubicación: función calcular_promedio_senal")
+     
     if len(datos)==0:
         raise ValueError("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
   
@@ -83,7 +87,7 @@ def calcular_maximo_senal(datos):
             if i > maximo:
                 maximo= i
         
-        except ValueError:
+        except TypeError:
             raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: El valor de la lista que se busca comparar no es del tipo correcto.| Ubicación: función calcular_maximo_senal ")
     
     return maximo
@@ -99,6 +103,7 @@ def calcular_minimo_senal(datos):
     
     Raises:
         ValueError: si la lista esta vacia
+        ValueError: si no hay lista de participantes
         TypeError: si no es valor float
         
     Returns
@@ -109,7 +114,10 @@ def calcular_minimo_senal(datos):
     """
 
     minimo= datos[0]
-
+    
+    if datos == None:
+        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: No existe el participante.| Ubicación: función calcular_promedio_senal")
+     
     if len(datos) == 0:
         raise ValueError ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")
     
@@ -167,13 +175,13 @@ def calcular_fc_desde_datos(datos):
 
     Parameters
     ----------
-    datos : TYPE
-        DESCRIPTION.
+    datos : lista
+        lista de datos.
 
     Returns
     -------
-    TYPE
-        DESCRIPTION.
+    diccio
+        llama a otra funcion.
 
     """
     
