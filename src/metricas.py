@@ -47,10 +47,7 @@ def calcular_promedio_senal(datos):
     
     except TypeError:
         raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: No pueden realizarse las operaciones porque alguno de los valores empleados no es un float | Ubicación: función calcular_promedio_senal.")
-        
-    except ZeroDivisionError:
-        raise ZeroDivisionError ("[ERROR CRÍTICO] Tipo de error encontrado: No se puede dividir por 0 | Ubicación: función calcular_promedio_senal")
-        
+          
     else:
         return promedio
     
