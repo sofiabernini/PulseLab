@@ -64,7 +64,7 @@ except Exception as e:
     
     
 if todos_los_datos == None:
-   print("El programa no puede ejecutarse por un error en el archivo.")
+   print("El programa no puede ejecutarse por un error en los datos del archivo.")
 
 else:
     while True:
