@@ -40,7 +40,7 @@ def cargar_datos (ruta_archivo):
         raise FileNotFoundError ("[ERROR CRÍTICO] Tipo de error encontrado: La ruta ingresada no es correcta para abrir el archivo | Ubicación: función cargar_datos(ruta_archivo)")
                
     if len(lineas) == 0:
-        return "El archivo que se abre con la ruta de archivo provista no contiene líneas"      
+        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: El archivo está vacío| Ubicación: función cargar_datos")
     
     lista_participantes = []
    
