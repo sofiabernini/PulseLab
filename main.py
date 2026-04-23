@@ -8,7 +8,7 @@ from src.cargar_datos import cargar_datos
 from src.filtrar_participante import filtrar_por_participante
 from src.metricas import calcular_promedio_senal, calcular_maximo_senal, calcular_minimo_senal, calcular_fc_desde_datos
 
-ruta = "datos/PulseLab_mock_data_error02.csv"
+ruta = "datos/PulseLab_mock_data.csv"
 todos_los_datos = None
 
 def ejecutar_programa (id_trabajado,todos_los_datos):
