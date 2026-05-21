@@ -96,7 +96,7 @@ Métodos:
 
 **Implementación de la librería Pandas:**
 
-La implementación de Pandas serviría para simplificar el código del programa. Por ejemplo, se podría reemplazar el almacenamiento de datos original por un DataFrame. En este caso, al cargar el archivo de datos de PulseLab, Pandas asignaría los tipos de datos a las 6 columnas correspondientes (ID participante, Tiempo, Valor ECG, Fase, Condición experimental y Hit). De esta manera, el acceso a los datos podría ser por medio de indexación lógica (retornando valores booleanos) en vez de por bucles.
+La implementación de Pandas serviría para simplificar el código del programa. Por ejemplo, se podría reemplazar el almacenamiento de datos original por un DataFrame. En este caso, al cargar el archivo de datos de PulseLab, Pandas asignaría los tipos de datos a las 5 columnas correspondientes (Tiempo, Valor ECG, Fase, Condición experimental y Hit) por cada fila correspondiente a un id_participante. De esta manera, el acceso a los datos podría ser por medio de indexación lógica (retornando valores booleanos) en vez de por bucles.
 
 
 
