@@ -20,7 +20,6 @@ def calcular_promedio_senal(datos):
         
     Raises:
         ValueError: si la lista esta vacia
-        ValueError: si no hay lista de participantes
         TypeError: si no es valor float
 
     Returns
@@ -32,26 +31,20 @@ def calcular_promedio_senal(datos):
     suma = 0
     cantidad = 0
     
-    if datos == None:
-        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: No existe el participante.| Ubicación: función calcular_promedio_senal")
-     
-    if len(datos) == 0:
+    if cantidad == 0:
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia.| Ubicación: función calcular_promedio_senal")
     
-       
-    try:
-        for d in datos:
+    for d in datos:
+        try:
             suma += d
             cantidad += 1
             promedio = suma/cantidad
     
-    except TypeError:
-        raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: No pueden realizarse las operaciones porque alguno de los valores empleados no es un float | Ubicación: función calcular_promedio_senal.")
-          
-    else:
-        return promedio
+        except TypeError:
+            raise TypeError("No es valor float")
     
-    
+    return promedio
+
 def calcular_maximo_senal(datos):
     """
     Calcula cual es la senal mas alta
@@ -65,8 +58,7 @@ def calcular_maximo_senal(datos):
 
         ValueError: si la lista esta vacia
         TypeError: si no es valor float
-        ValueError: si no hay lista de participantes
-        
+
     Returns
     -------
     float
@@ -74,21 +66,18 @@ def calcular_maximo_senal(datos):
 
     """
     
-    maximo= datos[0]
-   
-    if datos == None:
-        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: No existe el participante.| Ubicación: función calcular_promedio_senal")
-     
-    if len(datos)==0:
+    maximo= None
+    
+    if maximo == None:
         raise ValueError("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
-  
+    
     for i in datos:
         try:
             if i > maximo:
-                maximo= i
+            maximo= i
         
-        except TypeError:
-            raise TypeError("[ERROR CRÍTICO] Tipo de error encontrado: El valor de la lista que se busca comparar no es del tipo correcto.| Ubicación: función calcular_maximo_senal ")
+        except:
+            raise TypeError("No esta en float")
     
     return maximo
         
@@ -103,7 +92,6 @@ def calcular_minimo_senal(datos):
     
     Raises:
         ValueError: si la lista esta vacia
-        ValueError: si no hay lista de participantes
         TypeError: si no es valor float
         
     Returns
@@ -112,23 +100,16 @@ def calcular_minimo_senal(datos):
         Sale el valor mas bajo de la lista.
 
     """
-
-    minimo= datos[0]
+    minimo= None
+    raise ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")os:
     
-    if datos == None:
-        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: No existe el participante.| Ubicación: función calcular_promedio_senal")
-     
-    if len(datos) == 0:
-        raise ValueError ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")
-    
-    for i in datos:   
+    for i in datif minimo == None: 
         try:
             if i < minimo:
-                minimo = i
+            maximo= i
         
-        except TypeError:
-            raise TypeError("[ERROR CRÍTICO]: Tipo de error encontrado:| Ubicación: función cargar_minimo_senal")
-            
+        except:
+            raise TypeError("No esta en float")
     
     return minimo
     
@@ -160,7 +141,7 @@ def calcular_frecuencia_cardiaca(picos):
     cantidad_latidos = len(picos)
 
     if tiempo_total == 0:
-        raise ZeroDivisionError("[ERROR CRÍTICO] Tipo de error encontrado: No se puede dividir por 0 | Ubicación: funcion calcular_frecuencia_cardiaca")
+        raise ZeroDivisionError("No se puede dividir por 0")
 
        
     frecuencia = cantidad_latidos / tiempo_total
@@ -170,31 +151,35 @@ def calcular_frecuencia_cardiaca(picos):
     return frecuencia_bpm
 
 def calcular_fc_desde_datos(datos):
-   """
+    """
     
 
     Parameters
     ----------
-    datos : lista
-        lista de datos.
+    datos : TYPE
+>>>>>>> Stashed changes
+        DESCRIPTION.
 
     Returns
     -------
-    diccio
-        llama a otra funcion.
+<<<<<<< Updated upstream
+    float
+=======
+    TYPE
+>>>>>>> Stashed changes
+        DESCRIPTION.
 
     """
-    
-   tiempos = []
-   senal = []
+    tiempos = []
+    senal = []
 
-   for d in datos["Tiempo"]:
+    for d in datos["Tiempo"]:
         tiempos.append(d)
 
-   for d in datos["Valor ECG"]:
+    for d in datos["Valor ECG"]:
         senal.append(d)
         
-   picos = detectar_picos_qrs(tiempos, senal)
+    picos = detectar_picos_qrs(tiempos, senal)
 
 
-   return calcular_frecuencia_cardiaca(picos)
+    return calcular_frecuencia_cardiaca(picos)
