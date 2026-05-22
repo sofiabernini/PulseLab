@@ -106,17 +106,19 @@ Además, en el caso de que se implementara Pandas, también se modificarían las
 
 * src/cargar\_datos.py:
 
-\-Se modificaría la función cargar\_datos para reemplazar la apertura de archivos (método Open) y el procesamiento línea por línea por una única instrucción: pd.read\_csv().
+-Se modificaría la función cargar_datos para reemplazar la apertura de archivos (método Open) y el procesamiento línea por línea por una única instrucción: pd.read_csv(ruta_archivo). Dentro de la instrucción se incluirían las columnas que habría que asignarle al archivo.
 
-\-La validación de la ruta de archivo y del tamaño del archivo (que contenga datos) se mantendría de la misma manera. 
+-La validación de la ruta de archivo se mantendría igual y la del tamaño del archivo (que contenga datos) cambiaría levemente, utilizando la linea if df.size == 0. 
 
-\-Se eliminaría por completo la función parsear\_linea, ya que Pandas resuelve el split por comas. En todo caso, podría validarse si las columnas del CSV coinciden con las columnas esperadas para el análisis, pero dentro de la función cargar\_datos(ruta). Por otro lado, la limpieza de strings y el tipo de datos podrían validarse facilmente sin la necesidad de la función de parseo de líneas. 
+-Se eliminaría por completo la función parsear_linea, ya que Pandas resuelve el split por comas. En todo caso, podría validarse la cantidad de columnas con el try anterior y, a su vez, implementar una función de validacion de datos, que analice si cada dato corresponde al tipo y rango correcto, y si no es así, que lance un error. 
 
-\-La forma de validación de los tiempos crecientes depende estrictamente del diseño de programa y lo que se quiera obtener. Por un lado, si el error del orden de los tiempos no afecta qué datos se obtuvieron, podría pensarse en reordenar los datos con una linea de código que ordene los valores del tiempo (y el resto de datos asociados) de cada participante de menor a mayor. Primero deberían dividirse los participantes según su id con el método .groupby(id\_participante), definiendo la variable “grupos” para esa linea (df.groupby(“id\_participante”)) Luego, con un for id\_participante, grupo in grupos, se puede utilizar el método .sort\_values() (grupo.sort\_values(“tiempo”). 
+-La forma de validación de los tiempos crecientes depende estrictamente del diseño de programa y lo que se quiera obtener:
 
-Por otro lado, si se considera que un error en el orden de los tiempos pudo haber afectado la calidad de los datos del CSV, se debería utilizar la misma estructura del .groupby() y el for, pero se debería utilizar un condicional que pregunte if not tiempos.is\_monotonic\_increasing, y que haga un raise si se cumple la condición.
+    -Por un lado, si el error del orden de los tiempos no afecta qué datos se obtuvieron, podría pensarse en reordenar los datos con una linea de código que ordene los valores del tiempo (y el resto de datos asociados) de cada participante de menor a mayor. Primero deberían dividirse los participantes según su id con el método .groupby(id_participante), definiendo la variable “grupos” para esa linea (df.groupby(“id_participante”)) Luego, con un for id_participante, grupo in grupos, se puede utilizar el método .sort_values() (grupo.sort_values(“tiempo”). 
 
-\-El return de la función cambiaría y, en lugar de devolver una lista de diccionarios, devolvería un DataFrame.
+    -Por otro lado, si se considera que un error en el orden de los tiempos pudo haber afectado la calidad de los datos del CSV, se debería utilizar la misma estructura del .groupby() y el for, pero se debería utilizar un condicional que pregunte if not tiempos.is_monotonic_increasing, y que haga un raise si se cumple la condición.
+
+-El return de la función cambiaría y, en lugar de devolver una lista de diccionarios, devolvería un DataFrame.
 
 
 
