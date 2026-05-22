@@ -18,12 +18,11 @@ def cargar_datos (ruta_archivo):
 
     Returns
     -------
-    lista_participantes : lista (de diccionarios) tiene valores válidos y contiene datos.
-    "El archivo que se abre con la ruta de archivo provista no contiene lineas": si el archivo no tiene lineas para parsear
+    df = es un dataframe con los valores del archivo
     
     Raises:
         TyperError: si la ruta ingresada por parametro no es un string
-        ValueError: 1) si el archivo no tiene lineas 2) si algun valor llamado por otra funcion tiene errores 3) si la lista de valores de tiempo no es válida
+        ValueError: si el archivo no puede convertirse a Dataframe, si existe algún error en los datos (se usa la función de validación de datos)
         FileNotFoundError: Si el archivo no se encuentra al abrirlo con la ruta de archivo ingresada por parámetro
     '''
     
@@ -31,31 +30,122 @@ def cargar_datos (ruta_archivo):
     if not isinstance (ruta_archivo, str):
         raise TypeError ("[ERROR CRÍTICO] Tipo de error encontrado: La ruta ingresada no es un string | Ubicación: función cargar_datos(ruta_archivo)")
      
-#este bloque try/except maneja el error de apertura del archivo y lanza un error de tipo FileNotFoundError a la función principal
+#se maneja la apertura del archivo, la conversión a Dataframe, y la creación de las columnas
     try:
-        df= pd.read_csv(ruta_archivo)
+        df= pd.read_csv(ruta_archivo,
+                        header = None, 
+                        names = [
+                            "ID participante",
+                            "Tiempo",
+                            "Valor ECG",
+                            "Fase",
+                            "Condicion experimental",
+                            "Hit"
+                        ]
+                    )
         
     except FileNotFoundError:
         raise FileNotFoundError ("[ERROR CRÍTICO] Tipo de error encontrado: La ruta ingresada no es correcta para abrir el archivo | Ubicación: función cargar_datos(ruta_archivo)")
+        
+    except ValueError:
+        raise ValueError ("[ERROR CRÍTICO] Cantidad de columnas no es correcta o no se pudo dividir en columnas el archivo")
                
-    if len(df) == 0:
+    if df.size == 0:
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: El archivo está vacío| Ubicación: función cargar_datos")
 
-
-#columnas esperadas
-
-    columnas_esperadas = ["ID_participante", "Tiempo", "Valor ECG", "Fase", "Condición experimental", "Hit"].lower().strip()
-
-    if df.columns not in columnas_esperadas:
-        raise ValueError ("Las columnas no coinciden con las columnas esperadas")
+#validar datos dentro del Dataframe
+    try:
+        df = validar_datos(df)
+    except ValueError as e:
+        raise ValueError (e)
+        
     
-    else:
-        for columna in df.columns:
-            columna.str.strip()
+    return df
+        
+
+def validar_datos(df):
+    '''
+    Parameters:
+    ----------
+    df = es el dataframe con los datos que se deben validar
+      
+    Return:
+    ---------
+    None
+    
+    Raises:
+    ---------
+    ValueError: si cualquiera de los valores en la lista no es del valor esperado (ya sea no se puede convertir el valor al tipo de dato deseado, el valor no está en el rango, o, en el caso de los tiempos, no está ordenado de forma creciente)
+    
+    '''
+    
+#Si el archivo tiene valores tipo Nan, lanza error    
+    if df.isnua().sum().sum() > 0:
+        raise ValueError("[ERROR CRÍTICO] Hay valores vacíos")
+
+#validacion de IDs
+    try:
+        df["ID participante"] = df["ID participante"].astype(int)
+    except ValueError:
+        raise ValueError ("Error: ID inválido")
+        
+    if (df["ID participante"]<= 0).any():
+        raise ValueError ("Error crítico: Hay IDs menores o iguales a 0")
+        
+        
+#valida tiempos:
+    try:
+        df["Tiempo"] = df["Tiempo"].astype(float)
+        
+    except ValueError:
+        raise ValueError ("Error crítico: El valor de tiempo no es del tipo correcto")
+        
+    if (df["Tiempo"]<0).any():
+        raise ValueError ("Error crítico: Hay tiempos negativos")
+         
+#valida tiempos crecientes y raisea un ValueError si no están ordenados de forma creciente
+    try:
+        validar_tiempos_crecientes(df)
+        
+    except ValueError as e:
+        raise ValueError (e)
+        
+#Validación de valor ECG
+
+    try:
+        df["Valor ECG"] = df["Valor ECG"].astype(float)
+    except ValueError:
+        raise ValueError ("Error crítico: el valor ECG es inválido")
+        
+#Validación de fase
+
+    fases_validas = ["baseline", "tarea"]
+    
+    if ~df["Fase"].str.lower().isin(fases_validas).all():
+        raise ValueError ("Error crítico: hay fases que no son del valor correcto")
+        
+#Validacion de condicion experimental
+    condiciones_validas = ["competencia", "cooperacion"]
+    
+    if ~df["Condicion experimental"].str.lower().isin(condiciones_validas).all():
+        raise ValueError ("Error crítico: alguno de los valores de la condicion experimental no es del valor correcto")
+        
+#Validación de hit
+
+    mapa_hit = {
+        "true": True,
+        "false": False}
+    
+    
+    if ~df["Hit"].str.lower().isin(mapa_hit.keys()).all():
+        raise ValueError ("Error crítico, los valores de hit no son válidos")
+        
+#no hay ningún return porque es una función de validación
+
         
         
 
-def validar_tiempos_crecientes(tiempos):
+def validar_tiempos_crecientes(df):
     '''
     Esta función valida si una lista de valores asociados al tiempo no está vacía y si sus elementos están escritos de forma creciente.
 
@@ -70,16 +160,13 @@ def validar_tiempos_crecientes(tiempos):
 
     Returns
     -------
-    tiempos : list. mismo valor de entrada si es válido
-
+    None (no hace falta retornear nada, solo valida)
     '''
-    if len(tiempos) == 0:
-        raise ValueError ("La lista de tiempos está vacía")
     
-    for i in range (1, len(tiempos)):
-        if tiempos[i] <= tiempos[i-1]:
-            raise ValueError (f"Error en posición {i}: {tiempos[i]} <= {tiempos[i-1]}")   
-    return tiempos
-
+    for id_participante, grupo in df.groupby("ID participante"):
+        
+       if ~grupo["Tiempo"].is_monotonic_increasing:
+           raise ValueError (f"Error crítico: el participante de id: {id_participante} no tiene tiempos crecientes")
+           
 
 
