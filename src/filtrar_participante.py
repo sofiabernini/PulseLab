@@ -5,10 +5,9 @@ Created on Sun Apr  5 17:29:48 2026
 @author: angie
 """
 
-def filtrar_por_participante(datos, id_participante):
+def filtrar_por_participante(df, id_participante):
     """
-    Busca, en la lista de diccionarios, el diccionario
-    correspondiente al id ingresado
+    Busca, en el Data
 
     Parameters
     ----------
@@ -28,6 +27,6 @@ def filtrar_por_participante(datos, id_participante):
 
     """
     
-    filtrado=datos[datos["id_participante"]==id_participante]
+    filtrado=df[df["id_participante"]==id_participante]
     return filtrado
     
