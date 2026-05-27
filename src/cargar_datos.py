@@ -122,7 +122,7 @@ def validar_datos(df):
 
     fases_validas = ["baseline", "tarea"]
     
-    if ~df["Fase"].str.lower().isin(fases_validas).all():
+    if not df["Fase"].str.lower().isin(fases_validas).all():
         raise ValueError ("Error crítico: hay fases que no son del valor correcto")
         
 #Validacion de condicion experimental
@@ -132,14 +132,9 @@ def validar_datos(df):
         raise ValueError ("Error crítico: alguno de los valores de la condicion experimental no es del valor correcto")
         
 #Validación de hit
-    
-    #if not df["Hit"].str.lower().isin(mapa_hit.keys()).all():
     if not df["Hit"].isin([True,False]).all():
-    #if df["Hit"] != False and df["Hit"] != True:
         raise ValueError ("Error crítico, los valores de hit no son válidos")
         
-#no hay ningún return porque es una función de validación
-
     return df  
         
 
