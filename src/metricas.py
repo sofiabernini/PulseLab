@@ -5,7 +5,7 @@ Created on Fri Mar 27 11:33:57 2026
 
 @author: catalinahawes
 """
-
+import pandas as pd
 from src.función_detectar_picos import detectar_picos_qrs
 
 
@@ -28,22 +28,15 @@ def calcular_promedio_senal(datos):
         Sale el promedio de esa lista de senales.
 
     """
-    suma = 0
-    cantidad = 0
-    
-    if cantidad == 0:
-        raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia.| Ubicación: función calcular_promedio_senal")
-    
-    for d in datos:
-        try:
-            suma += d
-            cantidad += 1
-            promedio = suma/cantidad
-    
-        except TypeError:
-            raise TypeError("No es valor float")
-    
-    return promedio
+    serie = pd.Series(datos)
+
+    if serie.empty:
+        raise ValueError("[ERROR CRÍTICO] La lista está vacía.")
+
+    return serie.mean()
+
+
+
 
 def calcular_maximo_senal(datos):
     """
@@ -65,21 +58,13 @@ def calcular_maximo_senal(datos):
         Sale el valor mas alto de la lista.
 
     """
-    
-    maximo= None
-    
-    if maximo == None:
-        raise ValueError("[ERROR CRÍTICO] Tipo de error encontrado: La lista esta vacia | Ubicación: función calcular_maximo_senal")
-    
-    for i in datos:
-        try:
-            if i > maximo:
-            maximo= i
-        
-        except:
-            raise TypeError("No esta en float")
-    
-    return maximo
+    serie = pd.Series(datos)
+
+    if serie.empty:
+       raise ValueError("[ERROR CRÍTICO] La lista está vacía.")
+
+    return serie.max()
+
         
 def calcular_minimo_senal(datos):
     """
@@ -100,19 +85,12 @@ def calcular_minimo_senal(datos):
         Sale el valor mas bajo de la lista.
 
     """
-    minimo= None
-    raise ("[ERROR CRÍTICO]: Tipo de error encontrado: La lista esta vacia | Ubicación: función cargar_minimo_senal")os:
-    
-    for i in datif minimo == None: 
-        try:
-            if i < minimo:
-            maximo= i
-        
-        except:
-            raise TypeError("No esta en float")
-    
-    return minimo
-    
+    serie = pd.Series(datos)
+
+    if serie.empty:
+        raise ValueError("[ERROR CRÍTICO] La lista está vacía.")
+
+    return serie.min()
 
 def calcular_frecuencia_cardiaca(picos):
     """
@@ -133,22 +111,20 @@ def calcular_frecuencia_cardiaca(picos):
         Sale la frecuencia por minuto en la que se dieron los latidos cardiacos.
 
     """
-    
-    if len(picos) < 2:
-        raise ValueError("[ERROR CRÍTICO] Tipo de error encontrado: No hay suficientes datos para calcular la frecuencia | Ubicación: funcion calcular_frecuencia_cardiaca")
+    serie = pd.Series(picos)
 
-    tiempo_total = picos[-1] - picos[0]
-    cantidad_latidos = len(picos)
+    if len(serie) < 2:
+        raise ValueError("[ERROR CRÍTICO] No hay suficientes picos.")
+
+    tiempo_total = serie.iloc[-1] - serie.iloc[0]
 
     if tiempo_total == 0:
-        raise ZeroDivisionError("No se puede dividir por 0")
+        raise ZeroDivisionError("No se puede dividir por 0.")
 
-       
-    frecuencia = cantidad_latidos / tiempo_total
-
-    frecuencia_bpm = frecuencia * 60
+    frecuencia_bpm = (len(serie) / tiempo_total) * 60
 
     return frecuencia_bpm
+    
 
 def calcular_fc_desde_datos(datos):
     """
