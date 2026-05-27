@@ -140,7 +140,7 @@ def validar_datos(df):
         
 #no hay ningún return porque es una función de validación
 
-        
+      return df  
         
 
 def validar_tiempos_crecientes(df):
