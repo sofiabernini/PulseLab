@@ -27,7 +27,7 @@ def filtrar_por_participante(df, id_participante):
 
     """
     if df.size==0:
-        raise ValueError ("Error. El DataFrame se encuentra vacío")
+        raise ValueError ("Error. El DataFrame se encuentra vacío. La función filtrar_por_participante no puede ejecutar su tarea")
     if id_participante not in df["id_participante"].values:
         return None
     filtrado=df[df["id_participante"]==id_participante]
