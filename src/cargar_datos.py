@@ -32,24 +32,26 @@ def cargar_datos (ruta_archivo):
      
 #se maneja la apertura del archivo, la conversión a Dataframe, y la creación de las columnas
     try:
+        
+        columnas = [
+            "ID participante",
+            "Tiempo",
+            "Valor ECG",
+            "Fase",
+            "Condicion experimental",
+            "Hit"
+        ]
+        
         df= pd.read_csv(ruta_archivo,
                         header = None, 
-                        names = [
-                            "ID participante",
-                            "Tiempo",
-                            "Valor ECG",
-                            "Fase",
-                            "Condicion experimental",
-                            "Hit"
-                        ]
-                    )
+                        names = columnas)
         
     except FileNotFoundError:
         raise FileNotFoundError ("[ERROR CRÍTICO] Tipo de error encontrado: La ruta ingresada no es correcta para abrir el archivo | Ubicación: función cargar_datos(ruta_archivo)")
         
-    except ValueError:
-        raise ValueError ("[ERROR CRÍTICO] Cantidad de columnas no es correcta o no se pudo dividir en columnas el archivo")
-               
+    if len(df.columns) != len(columnas):
+        raise ValueError("Cantidad de columnas incorrecta")
+        
     if df.size == 0:
         raise ValueError ("[ERROR CRÍTICO] Tipo de error encontrado: El archivo está vacío| Ubicación: función cargar_datos")
 
@@ -132,8 +134,10 @@ def validar_datos(df):
         raise ValueError ("Error crítico: alguno de los valores de la condicion experimental no es del valor correcto")
         
 #Validación de hit
-    if not df["Hit"].isin([True,False]).all():
-        raise ValueError ("Error crítico, los valores de hit no son válidos")
+    valores_validos_hit = ["True", "False", True, False]
+
+    if not df["Hit"].isin(valores_validos_hit).all():
+        raise ValueError("Error crítico: los valores de hit no son válidos")
         
     return df  
         
@@ -161,5 +165,5 @@ def validar_tiempos_crecientes(df):
        if not grupo["Tiempo"].is_monotonic_increasing:
            raise ValueError (f"Error crítico: el participante de id: {id_participante} no tiene tiempos crecientes")
            
-
+    return df
 
