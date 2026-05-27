@@ -56,6 +56,7 @@ def cargar_datos (ruta_archivo):
 #validar datos dentro del Dataframe
     try:
         df = validar_datos(df)
+        #no devuelve nada el dataframe (None)
     except ValueError as e:
         raise ValueError (e)
         
@@ -80,7 +81,7 @@ def validar_datos(df):
     '''
     
 #Si el archivo tiene valores tipo Nan, lanza error    
-    if df.isnua().sum().sum() > 0:
+    if df.isna().sum().sum() > 0:
         raise ValueError("[ERROR CRÍTICO] Hay valores vacíos")
 
 #validacion de IDs
@@ -127,17 +128,14 @@ def validar_datos(df):
 #Validacion de condicion experimental
     condiciones_validas = ["competencia", "cooperacion"]
     
-    if ~df["Condicion experimental"].str.lower().isin(condiciones_validas).all():
+    if not df["Condicion experimental"].str.lower().isin(condiciones_validas).all():
         raise ValueError ("Error crítico: alguno de los valores de la condicion experimental no es del valor correcto")
         
 #Validación de hit
-
-    mapa_hit = {
-        "true": True,
-        "false": False}
     
-    
-    if ~df["Hit"].str.lower().isin(mapa_hit.keys()).all():
+    #if not df["Hit"].str.lower().isin(mapa_hit.keys()).all():
+    if not df["Hit"].isin([True,False]).all():
+    #if df["Hit"] != False and df["Hit"] != True:
         raise ValueError ("Error crítico, los valores de hit no son válidos")
         
 #no hay ningún return porque es una función de validación
@@ -165,7 +163,7 @@ def validar_tiempos_crecientes(df):
     
     for id_participante, grupo in df.groupby("ID participante"):
         
-       if ~grupo["Tiempo"].is_monotonic_increasing:
+       if not grupo["Tiempo"].is_monotonic_increasing:
            raise ValueError (f"Error crítico: el participante de id: {id_participante} no tiene tiempos crecientes")
            
 
