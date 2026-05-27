@@ -19,7 +19,7 @@ def filtrar_por_participante(df, id_participante):
     Returns
     -------
     filtrado : DataFrame
-        Es el DataFrame con los datos del participante cuyo id es el igual al id buscado.
+        Es el DataFrame con los datos del participante cuyo id es igual al id buscado.
     None
         Si el id buscado no está en el DataFrame.
     Raises: 
