@@ -5,6 +5,7 @@ Created on Fri Mar 27 11:33:57 2026
 
 """
 import pandas as pd
+import matplotlib.pyplot as plt
 from src.función_detectar_picos import detectar_picos_qrs
 
 
@@ -164,5 +165,17 @@ def calcular_fc_desde_datos(datos):
         
    picos = detectar_picos_qrs(tiempos, senal)
 
-
+   plt.figure(figsize=(12, 5))
+   plt.plot(tiempos, senal, label="Señal ECG")
+   plt.scatter(picos, label="Picos QRS")
+   plt.title("Señal ECG con detección de picos QRS")
+   plt.xlabel("Tiempo (s)")
+   plt.ylabel("Voltaje")
+   plt.legend()
+   plt.grid(True)
+   plt.show()
+   
    return calcular_frecuencia_cardiaca(picos)
+
+
+
