@@ -62,9 +62,6 @@ except FileNotFoundError:
 except Exception as e:
     print(f"Ocurrió un error inesperado durante la ejecución: {e}")
     
-    
-if todos_los_datos == None:
-   print("El programa no puede ejecutarse por un error en los datos del archivo.")
 
 else:
     while True:
