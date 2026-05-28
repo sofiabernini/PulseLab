@@ -62,32 +62,29 @@ except FileNotFoundError:
 except Exception as e:
     print(f"Ocurrió un error inesperado durante la ejecución: {e}")
     
-    
-if todos_los_datos == None:
-   print("El programa no puede ejecutarse por un error en los datos del archivo.")
 
-else:
-    while True:
-        
-        id_inicial = input("¿Desea analizar todos los ID? (s/n): ").lower()
+
+while True:
     
-        if id_inicial == 's':
-            for i in todos_los_datos:
-                id_posta = i['ID participante']
-                ejecutar_programa(id_posta, todos_los_datos)
+    id_inicial = input("¿Desea analizar todos los ID? (s/n): ").lower()
+
+    if id_inicial == 's':
+        for i in todos_los_datos:
+            id_posta = i['ID participante']
+            ejecutar_programa(id_posta, todos_los_datos)
+        break
+    
+    elif id_inicial == 'n':
+    
+        try:
+            id_a_analizar = int(input("Ingrese el ID del participante: "))
+            id_trabajado = id_a_analizar
+            ejecutar_programa(id_trabajado, todos_los_datos)
+            break
+       
+        except ValueError:
+            print("El ID debe ser un número entero.")
             break
         
-        elif id_inicial == 'n':
-        
-            try:
-                id_a_analizar = int(input("Ingrese el ID del participante: "))
-                id_trabajado = id_a_analizar
-                ejecutar_programa(id_trabajado, todos_los_datos)
-                break
-           
-            except ValueError:
-                print("El ID debe ser un número entero.")
-                break
-            
-        else:
-            print("Si desea analizar todos los ID escriba 's' sino 'n'.")
+    else:
+        print("Si desea analizar todos los ID escriba 's' sino 'n'.")

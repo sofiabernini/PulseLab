@@ -26,9 +26,10 @@ def filtrar_por_participante(df, id_participante):
         ValueError: Si el DataFrame está vacío.
 
     """
-    if df.size==0:
+    if df.size == 0:
         raise ValueError ("Error. El DataFrame se encuentra vacío. La función filtrar_por_participante no puede ejecutar su tarea")
-    filtrado=df[df["id_participante"]==id_participante]
+    
+    filtrado=df[df["ID participante"]==id_participante]
     if filtrado.size==0:
         return None
     return filtrado
