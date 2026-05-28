@@ -126,7 +126,7 @@ def calcular_frecuencia_cardiaca(picos):
     
 
 def calcular_fc_desde_datos(datos):
-"""
+   """
     Calcula la frecuencia cardíaca promedio (BPM) a partir de un DataFrame de ECG.
 
     La función extrae las secuencias de tiempo y señal del DataFrame, detecta 
@@ -153,16 +153,16 @@ def calcular_fc_desde_datos(datos):
         Si el tiempo transcurrido entre el primer y último pico detectado 
         es igual a cero.
     """
-    tiempos = []
-    senal = []
+   tiempos = []
+   senal = []
 
-    for d in datos["Tiempo"]:
+   for d in datos["Tiempo"]:
         tiempos.append(d)
 
-    for d in datos["Valor ECG"]:
+   for d in datos["Valor ECG"]:
         senal.append(d)
         
-    picos = detectar_picos_qrs(tiempos, senal)
+   picos = detectar_picos_qrs(tiempos, senal)
 
 
-    return calcular_frecuencia_cardiaca(picos)
+   return calcular_frecuencia_cardiaca(picos)
