@@ -3,7 +3,6 @@
 """
 Created on Fri Mar 27 11:33:57 2026
 
-@author: catalinahawes
 """
 import pandas as pd
 from src.función_detectar_picos import detectar_picos_qrs
@@ -127,24 +126,32 @@ def calcular_frecuencia_cardiaca(picos):
     
 
 def calcular_fc_desde_datos(datos):
-    """
-    
+"""
+    Calcula la frecuencia cardíaca promedio (BPM) a partir de un DataFrame de ECG.
+
+    La función extrae las secuencias de tiempo y señal del DataFrame, detecta 
+    los picos QRS correspondientes a los latidos y calcula la frecuencia 
+    cardíaca resultante en pulsos por minuto.
 
     Parameters
     ----------
-    datos : TYPE
->>>>>>> Stashed changes
-        DESCRIPTION.
+    datos : DataFrame
+        DataFrame de pandas que contiene las columnas "Tiempo" (valores float) 
+        y "Valor ECG" (valores float) del participante bajo análisis.
 
     Returns
     -------
-<<<<<<< Updated upstream
     float
-=======
-    TYPE
->>>>>>> Stashed changes
-        DESCRIPTION.
+        La frecuencia cardíaca calculada en latidos por minuto (BPM).
 
+    Raises
+    ------
+    ValueError
+        Si el algoritmo no logra detectar suficientes picos QRS (menos de 2) 
+        para realizar el cálculo de la frecuencia.
+    ZeroDivisionError
+        Si el tiempo transcurrido entre el primer y último pico detectado 
+        es igual a cero.
     """
     tiempos = []
     senal = []
